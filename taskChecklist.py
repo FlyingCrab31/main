@@ -1,4 +1,3 @@
-
 from prettytable import PrettyTable
 
 class TaskManager:
@@ -34,29 +33,54 @@ class TaskManager:
             print(f'Task "{task_name}" not found.')
 
 
-tasks_data = [
-    {"Task": "Research best practices for integrating multiple modules and ensuring a cohesive user experience.", "Status": "Pending"},
-    {"Task": "Develop integration points between various modules", "Status": "Pending"},
-    {"Task": "Start implementing basic integration functionalities", "Status": "Pending"}
-]
+    def menu(self):
+        while True:
+            print("\n1. View tasks\n2. Add task\n3. Mark task completed\n4. Delete task\n5. Exit")
+            choice = input("Choose an option: ")
 
+            if choice == '1':
+                self.display_tasks()
+            elif choice == '2':
+                task_name = input("Enter task name: ")
+                self.add_task(task_name)
+            elif choice == '3':
+                task_name = input("Enter task name to mark as completed: ")
+                self.mark_task_completed(task_name)
+            elif choice == '4':
+                task_name = input("Enter task name to delete: ")
+                self.delete_task(task_name)
+            elif choice == '5':
+                print("Exiting...")
+                break
+            else:
+                print("Invalid choice. Please try again.")
 
-task_manager = TaskManager(tasks_data)
+if __name__ == "__main__":
+    tasks_data = [
+        {"Task": "Research best practices for integrating multiple modules", "Status": "Pending"},
+        {"Task": "Develop integration points between modules", "Status": "Pending"}
+    ]
 
-# Display initial tasks
-print("Initial Task List:")
-task_manager.display_tasks()
+    # Create TaskManager
+    task_manager = TaskManager(tasks_data)
 
-#Delete Task
-task_manager.delete_task("Start implementing basic integration functionalities")
+    # Call the menu method
+    task_manager.menu()
 
-# Marking a task as completed
-task_manager.mark_task_completed("Develop integration points between various modules")
+    # Display initial tasks
+    print("Initial Task List:")
+    task_manager.display_tasks()
 
-# Display updated tasks
-print("\nUpdated Task List:")
-task_manager.display_tasks()
+    # Delete Task
+    task_manager.delete_task("Start implementing basic integration functionalities")
 
-# Again display Task
-print("\nFinal Task List:")
-task_manager.display_tasks()
+    # Marking a task as completed
+    task_manager.mark_task_completed("Develop integration points between various modules")
+
+    # Display updated tasks
+    print("\nUpdated Task List:")
+    task_manager.display_tasks()
+
+    # Again display Task
+    print("\nFinal Task List:")
+    task_manager.display_tasks()
